@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy Type 1
+  - Enemy Type 2
+  - Enemy Type 3
+  - Boundary
+  - Bullet
   layers:
   - Default
   - TransparentFX
