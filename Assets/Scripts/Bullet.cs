@@ -2,22 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))] //technique for making sure there isn't a null reference during runtime if you are going to use get component
+[RequireComponent(typeof(Rigidbody2D))]
 public class Bullet : MonoBehaviour
 {
   private Rigidbody2D myRigidbody2D;
 
   public float speed = 5;
-    // Start is called before the first frame update
-    void Start()
-    {
-      myRigidbody2D = GetComponent<Rigidbody2D>();
-      Fire();
-    }
+  public GameObject collisionFX;
 
-    // Update is called once per frame
-    private void Fire()
+  void Start()
+  {
+    myRigidbody2D = GetComponent<Rigidbody2D>();
+    Fire();
+  }
+
+  private void Fire()
+  {
+    myRigidbody2D.velocity = Vector2.up * speed;
+  }
+
+  private void OnTriggerEnter2D(Collider2D other)
+  {
+    if (other.gameObject.tag == "Boundary" || other.gameObject.tag == "Enemy Type 1" 
+        || other.gameObject.tag == "Enemy Type 2" || other.gameObject.tag == "Enemy Type 3")
     {
-      myRigidbody2D.velocity = Vector2.up * speed; 
+      Instantiate(collisionFX, transform.position, Quaternion.identity);
+      Destroy(gameObject);
     }
+  }
 }
+

@@ -7,8 +7,7 @@ public class Enemy : MonoBehaviour
     public int points;
     public delegate void EnemyDestroyed(int pointWorth);
     public static event EnemyDestroyed OnEnemyDestroyed;
-
-    // Renamed delegate and event for notifying the group movement
+    
     public delegate void EnemySpeedUp();
     public static event EnemySpeedUp OnEnemySpeedUp;
 
@@ -46,6 +45,7 @@ public class Enemy : MonoBehaviour
         
         OnEnemyDestroyed?.Invoke(points);
         gameManager.AddPoints(points);
+        gameManager.EnemyDestroyed(); // Notify GameManager that an enemy is destroyed
         
         OnEnemySpeedUp?.Invoke();
         

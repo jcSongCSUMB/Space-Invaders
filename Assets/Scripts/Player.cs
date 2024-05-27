@@ -10,27 +10,26 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D rBody;
     private float movementPerSecond = 5.0f;
+    private GameManager gameManager;
 
     private void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         Enemy.OnEnemyDestroyed += EnemyOnOnEnemyDestroyed;
         rBody = GetComponent<Rigidbody2D>();
     }
 
-
     private void OnDestroy()
     {
         Enemy.OnEnemyDestroyed -= EnemyOnOnEnemyDestroyed;
+        gameManager.PlayerDestroyed();
     }
-
 
     void EnemyOnOnEnemyDestroyed(int pointWorth)
     {
         Debug.Log($"Player received 'EnemyDied'. It worth {pointWorth} points.");
     }
     
-    
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -53,7 +52,9 @@ public class Player : MonoBehaviour
             }
         }
         else
+        {
             rBody.velocity = Vector2.zero;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

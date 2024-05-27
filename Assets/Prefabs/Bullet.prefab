@@ -171,3 +171,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  collisionFX: {fileID: 8575684859308731666, guid: 592698a624071cc45b80d99f7c39fbbc, type: 3}
